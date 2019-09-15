@@ -1,0 +1,22 @@
+﻿<Window x:Class="L11.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:L11"
+        mc:Ignorable="d"
+        Title="Cone Parametrs" Height="393.379" Width="343.63">
+    <Grid Name="GridName" Margin="10,0,2,-21">
+        <TextBox HorizontalAlignment="Left" Height="40" Margin="100,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" RenderTransformOrigin="0.078,1.432" Name="Radius"/>
+        <TextBox HorizontalAlignment="Left" Height="40" Margin="100,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" RenderTransformOrigin="0.078,1.432" Name="Hight"/>
+        <TextBox HorizontalAlignment="Left" Height="40" Margin="100,170,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" RenderTransformOrigin="0.078,1.432" Name="Density"/>
+
+        <Label Content="Radius" HorizontalAlignment="Left" Margin="30,50,0,0" VerticalAlignment="Top" Height="40" ContentStringFormat="100"/>
+        <Label Content="Hight" HorizontalAlignment="Left" Margin="30,110,0,0" VerticalAlignment="Top" Height="40" ContentStringFormat="100" RenderTransformOrigin="10.112,2.289"/>
+        <Label Content="Density" HorizontalAlignment="Left" Margin="30,170,0,0" VerticalAlignment="Top" Height="40" ContentStringFormat="100"/>
+
+        <Button Content="Button" HorizontalAlignment="Left" Margin="30,300,0,0" VerticalAlignment="Top" Width="150" Height="40" RenderTransformOrigin="1.01,-0.515"/>
+        <CheckBox Content="Volume" HorizontalAlignment="Left" Margin="30,240,0,0" VerticalAlignment="Top" Width="70" Height="40" Name="Volume" IsChecked="False"/>
+        <CheckBox Content="Mass" HorizontalAlignment="Left" Margin="129,240,0,0" VerticalAlignment="Top" Width="70" Height="40" Name="Mass" IsChecked="False"/>
+    </Grid>
+</Window>
