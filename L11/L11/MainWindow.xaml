@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:L11"
         mc:Ignorable="d"
-        Title="Cone Parametrs" Height="393.379" Width="343.63">
+        Title="Cone Parametrs" Height="400" Width="350">
     <Grid Name="GridName" Margin="10,0,2,-21">
         <TextBox HorizontalAlignment="Left" Height="40" Margin="100,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" RenderTransformOrigin="0.078,1.432" Name="Radius"/>
         <TextBox HorizontalAlignment="Left" Height="40" Margin="100,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" RenderTransformOrigin="0.078,1.432" Name="Hight"/>

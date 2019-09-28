@@ -8,7 +8,7 @@ using System.Windows.Controls;
 
 namespace L11
 {
-    class ElementsCollections
+    public class ElementsCollections
     {
         public List<UIElement> TextBoxes { get; } = new List<UIElement>();
 
