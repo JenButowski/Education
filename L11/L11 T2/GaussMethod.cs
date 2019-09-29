@@ -11,32 +11,39 @@ namespace L11_T2
     {
         public static void MainMethod(double [,] coefficients)
         {
-            double s = 0;
-            int n = 3;
-            double[,] privatecpefficients = GetPrivateCoefficcients(coefficients);
-            double[] b = GetPublicCoefficcients(coefficients);
-            double[] x = new double[n];          
-
-            for (int k = 0; k < n - 1; k++)
+            try
             {
-                for (int i = k + 1; i < n; i++)
+                double s = 0;
+                int n = 3;
+                double[,] privatecpefficients = GetPrivateCoefficcients(coefficients);
+                double[] b = GetPublicCoefficcients(coefficients);
+                double[] x = new double[n];
+
+                for (int k = 0; k < n - 1; k++)
                 {
-                    for (int j = k + 1; j < n; j++)
+                    for (int i = k + 1; i < n; i++)
                     {
-                        privatecpefficients[i, j] = privatecpefficients[i, j] - privatecpefficients[k, j] * (privatecpefficients[i, k] / privatecpefficients[k, k]);
+                        for (int j = k + 1; j < n; j++)
+                        {
+                            privatecpefficients[i, j] = privatecpefficients[i, j] - privatecpefficients[k, j] * (privatecpefficients[i, k] / privatecpefficients[k, k]);
+                        }
+                        b[i] = b[i] - b[k] * privatecpefficients[i, k] / privatecpefficients[k, k];
                     }
-                    b[i] = b[i] - b[k] * privatecpefficients[i, k] / privatecpefficients[k, k];
                 }
-            }
-            for (int k = n - 1; k >= 0; k--)
-            {
-                s = 0;
-                for (int j = k + 1; j < n; j++)
-                    s = s + privatecpefficients[k, j] * x[j];
-                x[k] = (b[k] - s) / privatecpefficients[k, k];
-            }
+                for (int k = n - 1; k >= 0; k--)
+                {
+                    s = 0;
+                    for (int j = k + 1; j < n; j++)
+                        s = s + privatecpefficients[k, j] * x[j];
+                    x[k] = (b[k] - s) / privatecpefficients[k, k];
+                }
 
-            MessageBox.Show($"X{x[0]} Y{x[1]} Z{x[2]}");
+                MessageBox.Show($"X{x[0]} Y{x[1]} Z{x[2]}");
+            }
+            catch
+            {
+                MessageBox.Show("Некорректно введены данные");
+            }
         }
 
         private static double[,] GetPrivateCoefficcients(double [,] coefficients)
