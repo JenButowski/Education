@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
 using L15.DataModels;
+using System.Configuration;
 
 namespace L14.Parsers
 {
@@ -13,7 +15,7 @@ namespace L14.Parsers
         {
             var result = new List<CarOwner>();
 
-            foreach(var ownerData in data.Values)
+            foreach (var ownerData in data.Values)
             {
                 var carOwner = new CarOwner
                 {
@@ -25,10 +27,32 @@ namespace L14.Parsers
                     PhoneNumber = ownerData[5].ToString()
                 };
 
+                carOwner.Violations = GetViolations(carOwner);
                 result.Add(carOwner);
             }
 
             return result;
+        }
+
+        private static List<Violation> GetViolations(CarOwner carOwner)
+        {
+            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Data"].ConnectionString))
+            {
+                connection.Open();
+                var result = new List<Violation>();
+                var command = new SqlCommand("SELECT * FROM Violations", connection);
+                var data = DataProvider.GetData(command);
+                var violations = ViolationsParser.Parse(data);
+
+                foreach (var violation in violations)
+                {
+                    if (carOwner.DriversLicenseCode == violation.CarOwner.DriversLicenseCode)
+                        result.Add(violation);
+                }
+                connection.Close();
+
+                return result;
+            }
         }
     }
 }

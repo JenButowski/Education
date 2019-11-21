@@ -17,13 +17,18 @@ namespace L15.Engines
             return BubbleSort(drivers);
         }
 
+        public List<CarOwner> GetWorstDrivers(List<CarOwner> carOwners)
+        {
+            return BubbleSort(carOwners);
+        }
+
         private List<CarOwner> BubbleSort(List<CarOwner> carOwners)
         {
             for(var i = 0; i < carOwners.Count(); i++)
             {
                 for(var j = i + 1; j < carOwners.Count(); j++)
                 {
-                    if(carOwners[i].Violations.Count() >  carOwners[j].Violations.Count())
+                    if(carOwners[i].Violations.Count() <  carOwners[j].Violations.Count())
                     {
                         var carOwner = carOwners[j];
                         carOwners[j] = carOwners[i];

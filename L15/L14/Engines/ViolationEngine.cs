@@ -36,6 +36,30 @@ namespace L15.Engines
             return districts;
         }
 
+        public List<string> GetWorstDistricts(List<Violation> violations, int numberofViolations)
+        {
+            var districts = new List<string>();
+
+            foreach (var violation in violations)
+            {
+                var district = violation.District;
+                var buffer = new List<string>();
+
+                for (var i = 0; i < violations.Count(); i++)
+                {
+                    if (district == violations[i].District)
+                    {
+                        buffer.Add(district);
+                    }
+                }
+
+                if (buffer.Count() >= numberofViolations)
+                    districts.Add(district);
+            }
+
+            return districts;
+        }
+
         public List<Violation> GetAllViolations(DataContext context)
         {
             var violations = context.Violations.Include("Type").ToList();

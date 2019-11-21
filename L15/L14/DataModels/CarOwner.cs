@@ -1,5 +1,4 @@
-﻿using L15.DataModels;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace L15.DataModels

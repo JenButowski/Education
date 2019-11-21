@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,12 +20,12 @@ namespace L14.Parsers
                 var violation = new Violation
                 {
                     Code = violationData[0].ToString(),
-                    Date = DateTime.ParseExact(violationData[1].ToString(),"yyyy/mm/dd", System.Globalization.CultureInfo.InvariantCulture),
+                    Date = (DateTime)violationData[1],
                     District = violationData[2].ToString(),
                     IsPaid = bool.Parse(violationData[3].ToString()),
                     InspectorNumber = violationData[4].ToString(),
-                    //CarOwner = (CarOwner)violationData[5],
-                    //Type = (ViolationType)violationData[6]
+                    CarOwner = new CarOwner { DriversLicenseCode = violationData[5].ToString() },
+                    Type = GetViolations(violationData[6].ToString())
                 };
 
                 result.Add(violation);
@@ -31,5 +33,26 @@ namespace L14.Parsers
 
             return result;
         }
+
+        private static ViolationType GetViolations(string violationCode)
+        {
+            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Data"].ConnectionString))
+            {
+                connection.Open();
+                var command = new SqlCommand("SELECT * FROM ViolationTypes", connection);
+                var data = DataProvider.GetData(command);
+                var violationTypes = ViolationTypeParser.Parse(data);
+
+                foreach (var violationType in violationTypes)
+                {
+                    if (violationCode == violationType.Code)
+                        return violationType;
+                }
+                connection.Close();
+
+                return null;
+            }
+        }
     }
 }
+
